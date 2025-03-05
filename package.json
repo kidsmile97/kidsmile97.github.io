@@ -1,18 +1,18 @@
 {
-  "name": "jekyll-theme-chirpy",
-  "version": "7.2.4",
+  "name": "kidsmile-blog",
+  "version": "0.1.1",
   "description": "A minimal, responsive, and feature-rich Jekyll theme for technical writing.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cotes2020/jekyll-theme-chirpy.git"
+    "url": "git+https://github.com/kidsmile97/kidsmile97.github.io.git"
   },
   "author": "kidsmile",
   "license": "MIT",
   "since": 2024,
   "bugs": {
-    "url": "https://github.com/cotes2020/jekyll-theme-chirpy/issues"
+    "url": "https://github.com/kidsmile97/kidsmile97.github.io/issues"
   },
-  "homepage": "https://github.com/cotes2020/jekyll-theme-chirpy/",
+  "homepage": "https://github.com/kidsmile97/kidsmile97.github.io",
   "scripts": {
     "build": "concurrently npm:build:*",
     "build:css": "node purgecss.js",
