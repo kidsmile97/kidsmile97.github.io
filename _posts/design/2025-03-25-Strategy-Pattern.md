@@ -1,4 +1,8 @@
 ---
+title: 策略模式
+date: 2025-03-20 20:50:00 +0800
+categories: [Design Pattern]
+tags: [设计模式, design pattern, 策略模式, strategy pattern]
 ---
 
 # 策略模式（Strategy Pattern）【行为型】
