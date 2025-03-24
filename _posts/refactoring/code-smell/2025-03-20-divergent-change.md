@@ -1,4 +1,8 @@
 ---
+title: 坏味道：发散式变化
+date: 2025-03-20 20:50:00 +0800
+categories: [refactoring, code-smell]
+tags: [重构, refactoring, 代码坏味道, code-smell, 发散式变化, divergent change]
 ---
 
 # 发散式变化（Divergent Change）
