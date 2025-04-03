@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      padding: 20px;
+      border: 4px solid red;
+      border-radius: 8px;
+    }
+    ol {
+      padding: 0;
+      height: 36px;
+      border: 1px solid green;
+      border-radius: 8px;
+      line-height: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+      background-color: greenyellow;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn">排序</button>
+  <ul id="ul"></ul>
+  <script>
+    var btn = document.getElementById('btn')
+    var ul = document.getElementById('ul')
+    var list = [
+      'JavaScript',
+      'Rust',
+      'C++',
+      'Golang',
+      'HTML',
+      '.NET',
+    ]
+    // 移除动画样式
+    function onTransitionEnd(evt) {
+      evt.target.style.removeProperty('transition');
+    }
+    // 初始化
+    var listItemEles = [];
+    for (var item of list) {
+      var listItem = document.createElement('ol');
+      listItem.innerText = item;
+      listItem.id = item;
+      // listItem.addEventListener('transitionend', onTransitionEnd);
+      ul.appendChild(listItem);
+      listItemEles.push(listItem);
+    }
+    // 获取位置
+    function getLocation(ele) {
+      const rect = ele.getBoundingClientRect();
+      return rect.top;
+    }
+    // 请求开始动画帧
+    function raf(callback) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(callback);
+      })
+    }
+    // 另一种请求动画帧的方式
+    function animate(el, invert) {
+      var player = el.animate([
+        { transform: `translateY(${invert}px)` },
+        { transform: 'translateY(0)' }
+      ], {
+        duration: 600,
+        easing: 'cubic-bezier(0,0,0.32,1)',
+      });
+    }
+    // 点击时移动到最后
+    function onSort() {
+      listItemEles.sort(() => Math.random() < 0.5 ? -1 : 1);
+      var first = listItemEles.map(item => getLocation(item));
+      listItemEles.forEach(item => {
+        ul.insertBefore(item, null);
+      })
+      /** element.animate */
+      listItemEles.forEach((item, index) => {
+        var last = getLocation(item);
+        animate(item, first[index] - last)
+      });
+      /** requestAnimationFrame */
+      // listItemEles.forEach((item, index) => {
+      //   var last = getLocation(item);
+      //   item.style.transform = `translateY(${first[index] - last}px)`;
+      // });
+      // listItemEles.forEach(item => {
+      //   raf(() => {
+      //     item.style.transition = 'all .6s';
+      //     item.style.removeProperty('transform');
+      //   })
+      // })
+    }
+    btn.addEventListener('click', onSort);
+  </script>
+</body>
+</html>
