@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+      }
+      .circle {
+        display: inline-block;
+        margin: 12px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: red;
+      }
+      .container {
+        position: relative;
+        width: 150px;
+        height: 150px;
+      }
+      .class {
+        display: inline-block;
+        mix-blend-mode: multiply;
+      }
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: green;
+        mask: url(/assets/img/favicons/mstile-150x150.png) no-repeat center / cover;
+      }
+      #first, #second, #third, #fourth, #fifth {
+        display: none;
+      }
+      .flex-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 40px;
+        flex: 1;
+      }
+      .mask-box {
+        mask: url(/assets/img/favicons/mstile-150x150.png) no-repeat center / cover;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        background-color: green;
+      }
+      #fifth .mask {
+        background-color: black;
+        mix-blend-mode: multiply;
+      }
+      .controler {
+        margin-left: 48px;
+      }
+      .controler > input {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="first">
+      <span class="circle"></span>
+      <span class="circle" style="opacity: 0.5;"></span>
+    </div>
+    <div id="second">
+      <div class="flex-box">
+        <p>形状内容：如下 png 图，存在透明通道部分的png，实际内容取决于不透明的内容，所以是存在一个不透明形状的（背景颜色为示意所加）</p>
+        <img style="background-color: green;" src="/assets/img/favicons/mstile-150x150.png" alt="">
+      </div>
+      <div class="flex-box">
+        <p>内容形状：可以看到元素的内容被 mask 切割了，mask 中有内容的部分元素才能显示内容，定义了元素内容的形状</p>
+        <div class="mask-box">
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+          这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        </div>
+      </div>
+    </div>
+    <div id="third">
+      <div class="mask-box">
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+        这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.这是一个有内容的普通div图.
+      </div>
+      <div class="mask-box"></div>
+    </div>
+    <div id="fourth">
+      <div class="container">
+        <img src="/assets/img/favicons/android-chrome-512x512.png" alt="">
+        <div class="mask"></div>
+      </div>
+    </div>
+    <div id="fifth">
+      <div class="container">
+        <img src="/assets/img/favicons/android-chrome-512x512.png" alt="">
+        <div class="mask" id="colorShow"></div>
+      </div>
+      <div class="controler">
+        <p>改变颜色试试吧！</p>
+        <input type="color" name="" id="colorControl">
+      </div>
+    </div>
+  </body>
+  <script>
+    window.addEventListener("load", function() {
+      var box = {
+        '#first': document.getElementById("first"),
+        '#second': document.getElementById("second"),
+        '#third': document.getElementById("third"),
+        '#fourth': document.getElementById("fourth"),
+        '#fifth': document.getElementById("fifth"),
+      }
+
+      var target = window.location.hash;
+      box[target].style.display = "flex";
+  
+      var colorBtn = document.getElementById("colorControl");
+      var colorShow = document.getElementById("colorShow");
+      colorBtn.value = '#31BFA7';
+      colorShow.style.backgroundColor = '#31BFA7';
+      colorBtn.addEventListener("input", (evt) => {
+        colorShow.style.backgroundColor = evt.target.value;
+      })
+    })
+  </script>
+</html>
