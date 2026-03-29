@@ -3,7 +3,10 @@ title: 设计：策略模式
 date: 2025-04-07 20:56:43 +0800
 categories: [Design Pattern]
 tags: [设计模式, design pattern, 策略模式, strategy pattern, strategy in js]
+mermaid: true
 ---
+
+[如果你知道策略模式，想直指使用该模式的意义，看这里](#抽象与模块化)
 
 # 策略模式（Strategy Pattern）【行为型】
 
@@ -15,7 +18,25 @@ Define a family of algorithms, encapsulate each one, and make them interchangeab
 
 ## 从最著名的支付案例开始
 
-![策略模式](/assets/img/design//strategy/strategy-model1.png)
+### 传统 if-else 实现
+
+```mermaid
+flowchart TD
+    A[开始支付] --> B{支付类型?}
+    B -->|wechat| C[微信支付]
+    B -->|alipay| D[支付宝支付]
+    B -->|bank| E[银联支付]
+    B -->|其他| F[不支持]
+    C --> G[发货]
+    D --> G
+    E --> G
+    F --> H[结束]
+    G --> H
+
+    style A fill:#e1f5fe
+    style G fill:#e8f5e9
+    style H fill:#ffebee
+```
 
 ```java
 void fn() {
@@ -40,6 +61,57 @@ void fn() {
 ## 基于策略模式的抽象优化
 
 `策略模式其实是为了辅助你抽象代码，拆分解耦的一种思想`。
+
+### 策略模式类图
+
+```mermaid
+classDiagram
+    class Payment {
+        <<interface>>
+        +getType() String
+        +pay(order) Result
+    }
+    
+    class Wepay {
+        +getType() String
+        +pay(order) Result
+    }
+    
+    class Alipay {
+        +getType() String
+        +pay(order) Result
+    }
+    
+    class Bankpay {
+        +getType() String
+        +pay(order) Result
+    }
+    
+    class Shopping {
+        +shopping(Payment payment)
+    }
+    
+    Payment <|.. Wepay
+    Payment <|.. Alipay
+    Payment <|.. Bankpay
+    Shopping ..> Payment : uses
+```
+
+### 策略模式流程图
+
+```mermaid
+flowchart LR
+    A[Shopping<br/>shopping方法] --> B{Payment<br/>接口}
+    B --> C[Wepay<br/>微信支付]
+    B --> D[Alipay<br/>支付宝支付]
+    B --> E[Bankpay<br/>银联支付]
+    
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#e8f5e9
+    style D fill:#e8f5e9
+    style E fill:#e8f5e9
+```
 
 ```java
 interface Payment {
@@ -76,6 +148,29 @@ void shopping(Payment payment) {
 2. `策略`能够被抽象。如果不同的分支完全没有相似性，或者说不同分支走的就是完全不应该一样的逻辑，只需要简单抽离逻辑即可。
 
 举个例子：
+
+```mermaid
+flowchart TD
+    subgraph 优化前
+        A1[main函数] --> B1{switch判断}
+        B1 -->|+| C1[a + b]
+        B1 -->|-| D1[a - b]
+        B1 -->|其他| E1[返回0]
+    end
+    
+    subgraph 优化后
+        A2[main函数] --> B2[Operation接口]
+        B2 --> C2[Add策略]
+        B2 --> D2[Subtract策略]
+    end
+    
+    优化前 -.->|重构| 优化后
+    
+    style A1 fill:#ffebee
+    style A2 fill:#e8f5e9
+    style B2 fill:#e3f2fd
+```
+
 ```java
 int main(String type) {
   int a = 100;
@@ -134,6 +229,20 @@ function draw(type) {
 ```
 
 策略模式优化，纯函数式编程实现
+
+```mermaid
+flowchart LR
+    A[draw函数] --> B{传入策略}
+    B -->|circle| C[绘制圆形]
+    B -->|rectangle| D[绘制矩形]
+    B -->|ellipse| E[绘制椭圆]
+    
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#e8f5e9
+    style D fill:#e8f5e9
+    style E fill:#e8f5e9
+```
 
 ```js
 const circle = () => {
@@ -234,4 +343,58 @@ void main() {
 
 后续对于整体程序的维护，就可以细分到每个能力模块去维护，这就是模块化的思维。
 
-# 对代码抽象的能力 对 实现模块化十分重要
+# 抽象与模块化
+
+有以下一个程序流程
+
+### 传统程序流程
+
+```mermaid
+flowchart TB
+    subgraph 传统程序流程
+        A[输入] --> B[处理逻辑A]
+        B --> C[处理逻辑B]
+        C --> D[处理逻辑C]
+        D --> E[输出]
+    end
+    
+    style A fill:#e3f2fd
+    style E fill:#e8f5e9
+    style B fill:#ffebee
+    style C fill:#ffebee
+    style D fill:#ffebee
+```
+
+### 应用策略模式后
+
+```mermaid
+flowchart TB
+    subgraph 策略模式模块化
+        A[输入] --> B[策略选择器]
+        B -->|策略A| C[策略A模块]
+        B -->|策略B| D[策略B模块]
+        B -->|策略C| E[策略C模块]
+        C --> F[输出]
+        D --> F
+        E --> F
+    end
+    
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#e8f5e9
+    style D fill:#e8f5e9
+    style E fill:#e8f5e9
+    style F fill:#e1f5fe
+```
+
+显而易见，区别就是模块化，策略模式之后把中间部分内容模块化了，使得模块化的部分显然更具可扩展性（非入侵式拓展）
+
+```text
+设计模式的本质是为了代码的分块，使得单独的代码块更好维护，更易拓展。
+
+由此辅助整个程序的演进，从来不是为了整个程序如何如何。
+
+真正高效的程序其实是那种极致的流程式程序，但是它就会完全失去维护与拓展的便利性。
+```
+
+> 设计模式提供的是一种抽象代码的方式与常用的思维方向

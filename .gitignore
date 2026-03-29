@@ -24,6 +24,16 @@ package-lock.json
 
 # Misc
 
-# platform
-.Ds_Store
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build outputs
+assets/js/dist/
+assets/css/dist/
 
